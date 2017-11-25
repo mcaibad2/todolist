@@ -1,12 +1,12 @@
-# todo list
+# TODO list
 
 todo list web app is a simple to-do list containing things you have to do today (go shopping, buy eggs, etc). 
 
-# Prerequisites
+## Prerequisites
 
 To run app you need mongodb installed and running on default port 27017
 
-# Set up
+## Set up
 
 1. Given that you have cloned project code and changed dir to that particular folder using command line:
 
@@ -17,7 +17,7 @@ npm start
 
 2. Navigate to http://localhost:3000/!
 
-# Misc
+## Misc
 
 - To run integration mocha tests (https://mochajs.org/):
 

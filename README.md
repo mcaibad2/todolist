@@ -15,11 +15,11 @@ npm install
 npm start
 ```
 
-2. Navigate to http://localhost:3000/!
+2. Navigate to http://localhost:3000/
 
 ## Misc
 
-- To run integration mocha tests (https://mochajs.org/):
+- To run integration tests:
 
 ```javascript
 npm test

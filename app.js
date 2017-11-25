@@ -1,4 +1,3 @@
-
 //
 // var index = require('./routes/index');
 // var users = require('./routes/users');
@@ -47,8 +46,17 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const index = require('./routes/index');
-const app = express()
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/twentyone', {useMongoClient: true});
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+    console.log('[todolist] connected to db')
+});
+
+const app = express()
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -78,6 +86,7 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(3000, () => {
-    console.log('Example app listening on port 3000!')
+    console.log('[todolist] app listening on port 3000')
 })
 
+module.exports = app;

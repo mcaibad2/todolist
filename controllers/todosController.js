@@ -1,5 +1,10 @@
-const root = process.cwd()
-const todosService = require(root + '/services/todosService')
+const root = process.cwd();
+const todosService = require(root + '/services/todosService');
+const log = require(root + '/log');
+
+// router.get('/', function(req, res, next) {
+//   res.render('index', { title: 'Express' });
+// });
 
 /**
  * @api {post} /todos Create todo
@@ -7,7 +12,7 @@ const todosService = require(root + '/services/todosService')
  * @apiParam {String} title Todo title
  * @apiParamExample {json} Input
  * {
- *      "title": "Buy pens"
+ *     "title": "Buy pens"
  * }
  * @apiSuccess {String} _id Todo id
  * @apiSuccess {String} title Todo title
@@ -22,6 +27,8 @@ const todosService = require(root + '/services/todosService')
  * HTTP/1.1 500 Internal Server Error
  */
 exports.create = (req, res, next) => {
+    log.info(`create todo`)
+    log.debug(`${JSON.stringify(req.body)}`)
     return todosService.create(req.body).then(result => {
         res.status(201).json(result);
     })
@@ -49,6 +56,7 @@ exports.create = (req, res, next) => {
  * HTTP/1.1 500 Internal Server Error
  */
 exports.read = (req, res, next) => {
+    log.info(`read todo`)
     return todosService.read(req.body).then(result => {
         res.status(200).json(result);
     })
@@ -67,6 +75,7 @@ exports.read = (req, res, next) => {
  */
 exports.delete = (req, res, next) => {
     if (req.params.id) {
+        log.info(`delete todo with id ${req.params.id}`)
         return todosService.delete(req.params.id).then(result => {
             res.status(204)
         })

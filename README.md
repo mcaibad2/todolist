@@ -1,6 +1,6 @@
 # TODO list
 
-todo list web app is a simple to-do list containing things you have to do today (go shopping, buy eggs, etc). 
+TODO list web app is a simple to-do list containing things you have to do today (go shopping, buy eggs, etc). 
 
 ## Prerequisites
 

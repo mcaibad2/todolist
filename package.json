@@ -1,19 +1,31 @@
 {
   "name": "todolist",
   "version": "1.0.0",
+  "private": true,
   "description": "The project is a simple to-do list containing things you have to do today",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
+    "start": "node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-   "repository": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/mcaibad2/todolist"
   },
   "keywords": [
     "git",
-    "repository":
+    "repository"
   ],
   "author": "Andreas Daskalopoulos",
-  "license": "ISC"
+  "license": "ISC",
+   "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.15.5",
+    "morgan": "~1.9.0",
+    "serve-favicon": "~2.4.5"
+  }
 }
+

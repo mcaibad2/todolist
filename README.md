@@ -5,6 +5,7 @@ The project is a simple to-do list containing things you have to do today (go sh
 - To start project: 
 
 ```javascript
+npm install
 npm start
 ```
 
@@ -17,5 +18,5 @@ npm test
 - CRUD apidoc documentation resides at apidoc folder (See more at http://apidocjs.com/). To generate it use the following command:
 
 ```javascript
-apidoc -i /controllers -o apidoc/
+apidoc -i controllers/ -o apidoc/
 ```

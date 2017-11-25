@@ -22,7 +22,8 @@ describe('Todos CRUD operations', () => {
                 .expect(201)
                 .then(res => {
                     res.status.should.equal(201)
-                    res.body.title.should.equal('Kill Tsathoggua')
+                    res.body.length.should.equal(1)
+                    res.body[0].title.should.equal('Kill Tsathoggua')
                 })
         })
     })
@@ -61,16 +62,16 @@ describe('Todos CRUD operations', () => {
                 throw err
             })
         })
-        it.only('Should respond with HTTP 200 and delete todo', () => {
+        it('Should respond with HTTP 200 and delete todo', () => {
             return todosService.read({
                 title: 'Buy pens'
             }).then(result => {
                 let id = result[0]._id;
                 return request(app)
                     .delete(`/todos/${id}`)
-                    .expect(204)
+                    .expect(200)
                     .then(res => {
-                        res.status.should.equal(204)
+                        res.status.should.equal(200)
                         return todosService.read({
                             title: 'Buy pens'
                         })

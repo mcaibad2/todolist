@@ -95,7 +95,7 @@ exports.delete = (req, res, next) => {
         log.info(`delete todo with id ${req.params.id}`)
         return todosService.delete(req.params.id).then(result => {
             return todosService.read().then(result => {
-                res.status(201).json(result);
+                res.status(200).json(result);
             })
         })
     } else {

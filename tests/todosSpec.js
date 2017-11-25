@@ -13,7 +13,7 @@ describe('Todos CRUD operations', () => {
                 throw err
             })
         })
-        it('Should respond with HTTP 201 and create one todo', () => {
+        it('Should respond with HTTP 201, create one todo and return todos list', () => {
             return request(app)
                 .post('/todos')
                 .send({
@@ -41,7 +41,7 @@ describe('Todos CRUD operations', () => {
                 throw err
             })
         })
-        it('Should respond with HTTP 200', () => {
+        it('Should respond with HTTP 200 and return todos list', () => {
             return request(app).get('/todos').expect(200).then(res => {
                 res.status.should.equal(200)
                 res.body.length.should.equal(2)
@@ -62,7 +62,7 @@ describe('Todos CRUD operations', () => {
                 throw err
             })
         })
-        it('Should respond with HTTP 200 and delete todo', () => {
+        it('Should respond with HTTP 200, delete todo and return todos list', () => {
             return todosService.read({
                 title: 'Buy pens'
             }).then(result => {

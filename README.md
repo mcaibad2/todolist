@@ -4,7 +4,9 @@ TODO list web app is a simple to-do list containing things you have to do today 
 
 ## Prerequisites
 
-To run app you need mongodb installed and running on default port 27017.
+To run app you need:
+1. mongodb installed and running on default port 27017.
+2. Node.js installed
 
 ## Set up
 

@@ -1,4 +1,4 @@
-const request = require('supertest-as-promised')
+const request = require('supertest')
 const Promise = require("bluebird");
 const should = require('should');
 

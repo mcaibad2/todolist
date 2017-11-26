@@ -8,6 +8,8 @@ var TodoSchema = new Schema({
         type: 'String',
         required: true
     },
+}, {
+    timestamps: true
 });
 var Todo = mongoose.model('Todo', TodoSchema);
 

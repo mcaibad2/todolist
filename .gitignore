@@ -61,7 +61,3 @@ typings/
 
 
 .idea/
-bin/
-public/
-routes/users.js
-views/

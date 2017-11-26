@@ -48,35 +48,176 @@ describe('Todos CRUD operations', () => {
             })
         })
     })
-    describe('DELETE /todos/:id', () => {
-        before(() => {
-            return todosService.deleteAll().then(result => {
-                return Promise.each([{
-                    title: 'Buy pens'
-                }, {
-                    title: 'Pay bills'
-                }], item => {
-                    return todosService.create(item)
+    describe('PUT /todos/:id', () => {
+        describe('Given id parameter for existing todo', () => {
+            before(() => {
+                return todosService.deleteAll().then(result => {
+                    return Promise.each([{
+                        title: 'Buy pens'
+                    }, {
+                        title: 'Pay bills'
+                    }], item => {
+                        return todosService.create(item)
+                    })
+                }).catch(err => {
+                    throw err
                 })
-            }).catch(err => {
-                throw err
+            })
+            it('Should respond with HTTP 200, update todo title and return todos list', () => {
+                return todosService.read({
+                    title: 'Buy pens'
+                }).then(result => {
+                    let id = result[0]._id;
+                    return request(app)
+                        .put(`/todos/${id}`)
+                        .send({
+                            title: 'Read newspaper'
+                        })
+                        .expect(200)
+                        .then(res => {
+                            res.status.should.equal(200)
+                            return todosService.findById(id)
+                        }).then(result => {
+                            result.title.should.equal('Read newspaper')
+                        })
+                })
             })
         })
-        it('Should respond with HTTP 200, delete todo and return todos list', () => {
-            return todosService.read({
-                title: 'Buy pens'
-            }).then(result => {
-                let id = result[0]._id;
-                return request(app)
-                    .delete(`/todos/${id}`)
-                    .expect(200)
-                    .then(res => {
-                        res.status.should.equal(200)
-                        return todosService.read({
-                            title: 'Buy pens'
+        describe('Given id parameter is missing', () => {
+            before(() => {
+                return todosService.deleteAll().then(result => {
+                    return Promise.each([{
+                        title: 'Buy pens'
+                    }, {
+                        title: 'Pay bills'
+                    }], item => {
+                        return todosService.create(item)
+                    })
+                }).catch(err => {
+                    throw err
+                })
+            })
+            it('Should respond with HTTP 404', () => {
+                return todosService.read({
+                    title: 'Buy pens'
+                }).then(result => {
+                    let id = result[0]._id;
+                    return request(app)
+                        .put('/todos')
+                        .send({
+                            title: 'Read newspaper'
                         })
-                    }).then(result => {
-                        result.should.be.empty
+                        .expect(404)
+                        .then(res => {
+                            res.status.should.equal(404)
+                        })
+                })
+            })
+        })
+        describe('Given id parameter for non-existing todo', () => {
+            before(() => {
+                return todosService.deleteAll().then(result => {
+                    return Promise.each([{
+                        title: 'Buy pens'
+                    }, {
+                        title: 'Pay bills'
+                    }], item => {
+                        return todosService.create(item)
+                    })
+                }).catch(err => {
+                    throw err
+                })
+            })
+            it('Should respond with HTTP 404', () => {
+                return request(app)
+                    .put('/todos/6a2b098580aec717d01a6240')
+                    .send({
+                        title: 'Read newspaper'
+                    })
+                    .expect(404)
+                    .then(res => {
+                        res.status.should.equal(404)
+                    })
+            })
+        })
+    })
+    describe('DELETE /todos/:id', () => {
+        describe('Given id parameter for existing todo', () => {
+            before(() => {
+                return todosService.deleteAll().then(result => {
+                    return Promise.each([{
+                        title: 'Buy pens'
+                    }, {
+                        title: 'Pay bills'
+                    }], item => {
+                        return todosService.create(item)
+                    })
+                }).catch(err => {
+                    throw err
+                })
+            })
+            it('Should respond with HTTP 200, delete todo and return todos list', () => {
+                return todosService.read({
+                    title: 'Buy pens'
+                }).then(result => {
+                    let id = result[0]._id;
+                    return request(app)
+                        .delete(`/todos/${id}`)
+                        .expect(200)
+                        .then(res => {
+                            res.status.should.equal(200)
+                            return todosService.read({
+                                title: 'Buy pens'
+                            })
+                        }).then(result => {
+                            result.should.be.empty
+                        })
+                })
+            })
+        })
+        describe('Given id parameter is missing', () => {
+            before(() => {
+                return todosService.deleteAll().then(result => {
+                    return Promise.each([{
+                        title: 'Buy pens'
+                    }, {
+                        title: 'Pay bills'
+                    }], item => {
+                        return todosService.create(item)
+                    })
+                }).catch(err => {
+                    throw err
+                })
+            })
+            it('Should respond with HTTP 404', () => {
+                return request(app)
+                    .delete('/todos')
+                    .expect(404)
+                    .then(res => {
+                        res.status.should.equal(404)
+                    })
+            })
+        })
+        describe('Given id parameter for non-existing todo', () => {
+            before(() => {
+                return todosService.deleteAll().then(result => {
+                    return Promise.each([{
+                        title: 'Buy pens'
+                    }, {
+                        title: 'Pay bills'
+                    }], item => {
+                        return todosService.create(item)
+                    })
+                }).catch(err => {
+                    throw err
+                })
+            })
+            it('Should respond with HTTP 404', () => {
+                return request(app)
+                    .delete('/todos/6a2b098580aec717d01a6240')
+                    .expect(404)
+                    .then(res => {
+                        res.status.should.equal(404)
                     })
             })
         })

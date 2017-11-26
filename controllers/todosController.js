@@ -67,6 +67,44 @@ exports.read = (req, res, next) => {
 }
 
 /**
+ * @api {update} /todos/:id Update todo
+ * @apiGroup Todos
+ * @apiParam {String} id Todo id
+ * @apiSuccess {Object[]} todos Todo's list
+ * @apiSuccess {String} todos._id Todo id
+ * @apiSuccess {String} todos.title Todo title
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200 OK
+ * [{
+ *    "_id":"5a1961ac89d4a31ad8d2d9a3",
+ *    "title":"Buy pens",
+ *    "__v":0
+ *},
+ *{
+ *    "_id":"5a1961ac89d4a31ad8d2d9a4",
+ *    "title":"Pay bills",
+ *    "__v":0
+ *}]
+ * @apiErrorExample {json} Update todo error
+ * HTTP/1.1 500 Internal Server Error
+ * @apiErrorExample {json} Update todo error
+ * HTTP/1.1 400 Bad Request
+ */
+exports.update = (req, res, next) => {
+    log.info(`update todo with id ${req.params.id}`)
+    log.debug(`update: ${JSON.stringify(req.body)}`)
+    return todosService.update(req.params.id, req.body).then(result => {
+        if (result) {
+            return todosService.read().then(result => {
+                res.status(200).json(result);
+            })
+        } else {
+            res.status(404).json()
+        }
+    })
+}
+
+/**
  * @api {delete} /todos/:id Delete todo
  * @apiGroup Todos
  * @apiParam {String} id Todo id
@@ -91,14 +129,14 @@ exports.read = (req, res, next) => {
  * HTTP/1.1 400 Bad Request
  */
 exports.delete = (req, res, next) => {
-    if (req.params.id) {
-        log.info(`delete todo with id ${req.params.id}`)
-        return todosService.delete(req.params.id).then(result => {
+    log.info(`delete todo with id ${req.params.id}`)
+    return todosService.delete(req.params.id).then(result => {
+        if (result) {
             return todosService.read().then(result => {
                 res.status(200).json(result);
             })
-        })
-    } else {
-        res.status(400);
-    }
+        } else {
+            res.status(404).json()
+        }
+    })
 }

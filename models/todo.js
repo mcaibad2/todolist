@@ -9,7 +9,7 @@ var TodoSchema = new Schema({
         required: true
     },
 }, {
-    timestamps: true
+    timestamps: false
 });
 var Todo = mongoose.model('Todo', TodoSchema);
 

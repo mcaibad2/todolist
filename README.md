@@ -1,3 +1,5 @@
+h1. Wrote this code as the main deliverable test assignment for http://twenty-one.co/. Although I managed to finish in one day (added some minor changes next day) they accused me of copying this code... Anyway, I am writing this down as a personal reminder and for all you out there.
+
 # TODO list
 
 TODO list web app is a simple to-do list containing things you have to do today (go shopping, buy eggs, etc). 

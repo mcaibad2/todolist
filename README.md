@@ -1,4 +1,4 @@
-h1. Wrote this code as the main deliverable test assignment for http://twenty-one.co/. Although I managed to finish in one day (added some minor changes next day) they accused me of copying this code... Anyway, I am writing this down as a personal reminder and for all you out there.
+Wrote this code as the main deliverable test assignment for http://twenty-one.co/. Although I managed to deliver working code in one day (added some minor changes next day) they accused me of cheating... I am writing this down as a personal reminder and for all you out there, especially for twenty one developers that may (or may not) have run this code. 
 
 # TODO list
 
